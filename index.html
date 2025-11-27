@@ -29,6 +29,7 @@
             <button class="nav-btn" onclick="showSection('midi')">🎼 Tutorial MIDI</button>
             <button class="nav-btn" onclick="showSection('sequencer')">🎵 Sequenciador MP3</button>
             <button class="nav-btn" onclick="showSection('quiz')">🎯 Quiz</button>
+            <button class="nav-btn" onclick="showSection('credits')">★ Créditos</button>
         </nav>
 
         <!-- Seção: Início -->
@@ -228,7 +229,6 @@
                     <p><strong>Música completa com todos os instrumentos originais</strong></p>
                     <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
                         <button class="seq-btn" onclick="playVariation('original')">▶️ Tocar</button>
-                        <button class="seq-btn" onclick="pauseMIDI()">⏸️ Pausar</button>
                         <button class="seq-btn" onclick="stopMIDI()">⏹️ Parar</button>
                     </div>
                     <p style="margin-top: 10px; color: #666; font-size: 0.9em;">
@@ -241,7 +241,6 @@
                     <p><strong>Todas as trilhas tocando com piano</strong></p>
                     <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
                         <button class="seq-btn" onclick="playVariation('piano')">▶️ Tocar</button>
-                        <button class="seq-btn" onclick="pauseMIDI()">⏸️ Pausar</button>
                         <button class="seq-btn" onclick="stopMIDI()">⏹️ Parar</button>
                     </div>
                     <p style="margin-top: 10px; color: #666; font-size: 0.9em;">
@@ -273,7 +272,6 @@
                 <p><strong>Versão simplificada com instrumentos modificados</strong></p>
                 <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 15px 0;">
                     <button class="seq-btn" onclick="playVariation('alterada')">▶️ Tocar</button>
-                    <button class="seq-btn" onclick="pauseMIDI()">⏸️ Pausar</button>
                     <button class="seq-btn" onclick="stopMIDI()">⏹️ Parar</button>
                 </div>
                 <p style="margin-top: 10px; color: #666; font-size: 0.9em;">
@@ -403,7 +401,7 @@
             <p>Teste seus conhecimentos! O sistema selecionará <strong>5 perguntas aleatórias</strong> de um banco de <strong>15 perguntas</strong>.</p>
             
             <div class="quiz-container">
-                <button class="quiz-btn" onclick="startQuiz()" style="margin: 20px auto; display: block;">🎲 Iniciar Quiz Aleatório</button>
+                <button class="quiz-btn" onclick="startQuiz()" style="margin: 20px auto; display: block;">🎲 Iniciar Quiz</button>
                 <div id="quizQuestions"></div>
                 <div id="quizResult"></div>
             </div>
