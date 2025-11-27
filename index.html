@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synth Studio - Sistema Educacional Multimídia</title>
+    <script src="https://cdn.jsdelivr.net/npm/midi-player-js@2.0.7/browser/midiplayer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tonejs/midi@2.0.28/build/Midi.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/soundfont-player@0.12.0/dist/soundfont-player.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Synth Studio</h1>
+            <p class="subtitle">Sistema Multimídia Educacional - Música e Síntese Sonora</p>
+            
+            <!-- SVG Logo (Imagem Vetorial) -->
+            <div class="logo-container">
+                <img src="logo.svg" alt="Synth Studio Pro Logo" class="logo-svg" width="120" height="120">
+            </div>
+        </header>
+
+        <nav>
+            <button class="nav-btn active" onclick="showSection('home')">🏠 Início</button>
+            <button class="nav-btn" onclick="showSection('learn')">📚 Teoria</button>
+            <button class="nav-btn" onclick="showSection('midi')">🎼 Tutorial MIDI</button>
+            <button class="nav-btn" onclick="showSection('sequencer')">🎵 Sequenciador MP3</button>
+            <button class="nav-btn" onclick="showSection('quiz')">🎯 Quiz</button>
+        </nav>
+
+        <!-- Seção: Início -->
+        <section id="home" class="section active">
+            <h2>Bem-vindo ao Synth Studio Pro!</h2>
+            
+            <!-- Imagem Matricial (Canvas) -->
+            <canvas id="welcomeImage" width="1200" height="250" class="bitmap-img"></canvas>
+            
+            <div class="highlight-box">
+                <h3>🎓 Sobre Este Sistema Educacional</h3>
+                <p><strong>Synth Studio Pro</strong> é um sistema multimídia interativo completo para aprender sobre <strong>síntese de áudio e música digital</strong>. Explore de forma não-linear, tocando instrumentos, criando batidas e testando seus conhecimentos!</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>🎼 O que você vai aprender</h3>
+                    <ul class="info-list">
+                        <li><strong>Formas de Onda:</strong> Sine, Square, Sawtooth, Triangle</li>
+                        <li><strong>Envelope ADSR:</strong> Attack, Decay, Sustain, Release</li>
+                        <li><strong>Tipos de Síntese:</strong> Subtrativa, Aditiva, FM</li>
+                        <li><strong>Osciladores e LFO:</strong> Geradores de som</li>
+                        <li><strong>Filtros:</strong> Modelagem de timbre</li>
+                        <li><strong>MIDI:</strong> Protocolo musical digital</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h3>🎨 Recursos do Sistema</h3>
+                    <ul class="info-list">
+                        <li>✅ <strong>6 Tipos de Mídia:</strong> Imagens vetoriais/matriciais, áudio MP3, MIDI, vídeo, animação</li>
+                        <li>🎼 <strong>Tutorial MIDI:</strong> Aprenda a manipular arquivos MIDI</li>
+                        <li>🎵 <strong>Sequenciador MP3:</strong> Crie batidas com áudio digitalizado</li>
+                        <li>📊 <strong>Animações Visuais:</strong> Visualize as ondas sonoras</li>
+                        <li>🎯 <strong>Quiz Interativo:</strong> 15 perguntas, 5 sorteadas</li>
+                        <li>🔄 <strong>Navegação Livre:</strong> Explore como quiser</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>🧭 Como Navegar</h3>
+                <p><strong>Use o menu no topo da página</strong> para explorar cada seção. Você pode visitar as áreas em qualquer ordem:</p>
+                <ul class="info-list">
+                    <li><strong>Teoria:</strong> Aprenda os conceitos fundamentais de síntese</li>
+                    <li><strong>Tutorial MIDI:</strong> Veja como manipular arquivos MIDI e trocar instrumentos</li>
+                    <li><strong>Sequenciador MP3:</strong> Monte suas próprias batidas com áudio digitalizado</li>
+                    <li><strong>Quiz:</strong> Teste e consolide seu conhecimento</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Seção: Aprender -->
+        <section id="learn" class="section">
+            <h2>📚 Teoria da Síntese Sonora</h2>
+            
+            <div class="highlight-box">
+                <h3>O que é Síntese de Áudio?</h3>
+                <p>A <strong>síntese de áudio</strong> é o processo de criar sons artificialmente usando componentes eletrônicos ou digitais. Diferente de gravar sons naturais (áudio digitalizado), a síntese <strong>gera ondas sonoras do zero</strong> usando algoritmos matemáticos e osciladores.</p>
+                <p>Sintetizadores foram revolucionários na música eletrônica, permitindo criar sons impossíveis de obter com instrumentos acústicos tradicionais.</p>
+            </div>
+
+            <h3>🌊 Formas de Onda Básicas</h3>
+            <p>Todo som sintetizado começa com <strong>formas de onda fundamentais</strong>. Cada uma tem características tímbricas únicas:</p>
+
+            <div class="waveform-demo">
+                <div class="wave-card">
+                    <canvas id="sineWave" width="200" height="120"></canvas>
+                    <h4>Sine (Senoidal)</h4>
+                    <p><strong>Som puro e suave</strong>, sem harmônicos. É a forma de onda mais simples, usada para tons puros e sub-bass.</p>
+                </div>
+                <div class="wave-card">
+                    <canvas id="squareWave" width="200" height="120"></canvas>
+                    <h4>Square (Quadrada)</h4>
+                    <p><strong>Som oco e robusto</strong>, rico em harmônicos ímpares. Usado para leads e baixos eletrônicos.</p>
+                </div>
+                <div class="wave-card">
+                    <canvas id="sawWave" width="200" height="120"></canvas>
+                    <h4>Sawtooth (Dente de Serra)</h4>
+                    <p><strong>Som brilhante e rico</strong> em todos os harmônicos. A forma mais versátil para síntese.</p>
+                </div>
+                <div class="wave-card">
+                    <canvas id="triangleWave" width="200" height="120"></canvas>
+                    <h4>Triangle (Triangular)</h4>
+                    <p><strong>Entre Sine e Square</strong>, suave mas com corpo. Harmônicos ímpares decaem rapidamente.</p>
+                </div>
+            </div>
+
+            <h3>📈 Envelope ADSR</h3>
+            <p>O <strong>envelope ADSR</strong> controla como o som evolui ao longo do tempo. É fundamental para dar "vida" e expressividade aos sons sintetizados:</p>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h4>⚡ Attack (Ataque)</h4>
+                    <p>Tempo que o som leva para atingir o <strong>volume máximo</strong> após a nota ser tocada. Attack rápido = som percussivo. Attack lento = som suave que "cresce".</p>
+                </div>
+                <div class="content-card">
+                    <h4>📉 Decay (Decaimento)</h4>
+                    <p>Tempo para o volume <strong>cair do pico até o nível de sustentação</strong>. Controla o "brilho inicial" do som.</p>
+                </div>
+                <div class="content-card">
+                    <h4>🎹 Sustain (Sustentação)</h4>
+                    <p><strong>Nível mantido</strong> enquanto a tecla está pressionada. É o único parâmetro que representa nível (não tempo).</p>
+                </div>
+                <div class="content-card">
+                    <h4>🌊 Release (Liberação)</h4>
+                    <p>Tempo para o som <strong>desaparecer completamente</strong> após soltar a tecla. Release longo = som que "flutua".</p>
+                </div>
+            </div>
+
+            <h3>🎛️ Tipos de Síntese</h3>
+            
+            <div class="highlight-box">
+                <h4>🔻 Síntese Subtrativa</h4>
+                <p>O tipo mais comum. Começa com <strong>ondas ricas em harmônicos</strong> (como sawtooth) e usa <strong>filtros</strong> para remover frequências, esculpindo o timbre desejado. Usado em sintetizadores analógicos clássicos.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>➕ Síntese Aditiva</h4>
+                <p>Cria sons complexos <strong>combinando múltiplas ondas simples</strong> (geralmente senoidais). Cada onda representa um harmônico. Muito poderosa mas computacionalmente intensiva.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>📻 Síntese FM (Frequency Modulation)</h4>
+                <p><strong>Modula a frequência de uma onda com outra</strong>, criando timbres complexos e metálicos. Popularizada pelo Yamaha DX7. Excelente para sons de sino, piano elétrico e pads atmosféricos.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>📊 Síntese por Tabela de Onda (Wavetable)</h4>
+                <p>Usa <strong>amostras de ondas pré-gravadas</strong> que podem ser percorridas e interpoladas, criando evolução tímbrica. Combina o melhor de síntese e sampling.</p>
+            </div>
+
+            <h3>🎚️ Osciladores e LFO</h3>
+            <p>Um <strong>oscilador</strong> é um componente que gera formas de onda. É o coração de qualquer sintetizador - sem osciladores, não há som!</p>
+            <p>Um <strong>LFO (Low Frequency Oscillator)</strong> é um oscilador de <strong>baixa frequência</strong> (abaixo da faixa audível) usado para <strong>modular parâmetros</strong> como pitch (vibrato), volume (tremolo) ou filtros. Cria movimento e vida no som.</p>
+
+            <h3>🎼 MIDI - Musical Instrument Digital Interface</h3>
+            <p><strong>MIDI</strong> é um protocolo de comunicação que permite que instrumentos musicais eletrônicos, computadores e outros dispositivos se comuniquem. Diferente de áudio digital, MIDI transmite <strong>dados de performance</strong> (notas, velocidade, duração), não o som em si.</p>
+            <p>Vantagens do MIDI: arquivos pequenos, totalmente editável, permite trocar sons sem regravar, usado em sequenciadores como nosso Sequenciador MIDI.</p>
+
+            <h3>🎨 Filtros</h3>
+            <p>Filtros são processadores que <strong>removem ou atenuam certas frequências</strong>. Os tipos principais são:</p>
+            <ul class="info-list">
+                <li><strong>Low-Pass:</strong> Deixa passar frequências baixas, remove agudos (som mais "escuro")</li>
+                <li><strong>High-Pass:</strong> Deixa passar frequências altas, remove graves (som mais "fino")</li>
+                <li><strong>Band-Pass:</strong> Deixa passar uma faixa específica de frequências</li>
+                <li><strong>Notch:</strong> Remove uma faixa específica de frequências</li>
+            </ul>
+
+            <!-- Vídeo Simulado (Canvas Animado) -->
+            <h3>📹 Visualização: Síntese em Ação</h3>
+            <p>Veja como diferentes formas de onda se comportam em tempo real:</p>
+            <canvas id="videoCanvas" width="1200" height="350" style="width: 100%; border-radius: 15px; background: #000;"></canvas>
+        </section>
+
+        <!-- Seção: Tutorial MIDI -->
+        <section id="midi" class="section">
+            <h2>🎼 Tutorial MIDI - Manipulando Arquivos MIDI</h2>
+            
+            <div class="highlight-box">
+                <h3>📝 O que você vai aprender nesta seção</h3>
+                <p>Neste tutorial completo, você vai aprender a <strong>manipular arquivos MIDI</strong>, entender como eles funcionam e como fazer alterações práticas, como <strong>trocar instrumentos</strong> em uma música!</p>
+            </div>
+
+            <h3>🎵 O que é um Arquivo MIDI?</h3>
+            <p>Um arquivo MIDI (<strong>Musical Instrument Digital Interface</strong>) não contém áudio gravado, mas sim <strong>instruções musicais</strong>: qual nota tocar, quando tocar, por quanto tempo e com qual instrumento. É como uma "partitura digital"!</p>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h4>✅ Vantagens do MIDI</h4>
+                    <ul class="info-list">
+                        <li>Arquivos <strong>muito pequenos</strong> (KB vs MB)</li>
+                        <li><strong>Totalmente editável</strong> após a criação</li>
+                        <li>Pode trocar <strong>instrumentos sem regravar</strong></li>
+                        <li>Ajustar <strong>tempo e tonalidade facilmente</strong></li>
+                        <li>Usado em produção musical profissional</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <h4>🎹 Componentes de um MIDI</h4>
+                    <ul class="info-list">
+                        <li><strong>Tracks (Trilhas):</strong> Cada instrumento em uma trilha</li>
+                        <li><strong>Notes (Notas):</strong> Altura (pitch) e duração</li>
+                        <li><strong>Velocity:</strong> Intensidade da nota</li>
+                        <li><strong>Program Change:</strong> Seleciona o instrumento</li>
+                        <li><strong>Control Changes:</strong> Volume, pan, efeitos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🎼 Galeria de Variações MIDI</h3>
+            <p>Ouça a <strong>mesma música</strong> com diferentes combinações de instrumentos. Clique em qualquer botão abaixo para ouvir como a troca de instrumentos MIDI transforma o som!</p>
+            
+            <div style="display: grid; gap: 20px; margin: 30px 0;">
+                <div class="content-card">
+                    <h4>🎵 Versão Original</h4>
+                    <p><strong>Música completa com todos os instrumentos originais</strong></p>
+                    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        <button class="seq-btn" onclick="playVariation('original')">▶️ Tocar</button>
+                        <button class="seq-btn" onclick="pauseMIDI()">⏸️ Pausar</button>
+                        <button class="seq-btn" onclick="stopMIDI()">⏹️ Parar</button>
+                    </div>
+                    <p style="margin-top: 10px; color: #666; font-size: 0.9em;">
+                        Versão original da composição com arranjo completo.
+                    </p>
+                </div>
+
+                <div class="content-card">
+                    <h4>🎹 Versão Piano Solo</h4>
+                    <p><strong>Todas as trilhas tocando com piano</strong></p>
+                    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        <button class="seq-btn" onclick="playVariation('piano')">▶️ Tocar</button>
+                        <button class="seq-btn" onclick="pauseMIDI()">⏸️ Pausar</button>
+                        <button class="seq-btn" onclick="stopMIDI()">⏹️ Parar</button>
+                    </div>
+                    <p style="margin-top: 10px; color: #666; font-size: 0.9em;">
+                        Versão minimalista com apenas piano acústico em todas as vozes.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="highlight-box" style="margin-top: 30px;">
+                <h4>💡 Como funcionam as variações?</h4>
+                <p>Cada botão carrega um arquivo MIDI diferente da pasta <code>midi/</code>. Todos os arquivos contêm a <strong>mesma melodia base</strong>, mas com <strong>instrumentos e arranjos diferentes</strong> configurados nos canais MIDI. A versão Piano demonstra como uma música pode ser tocada inteiramente com um único instrumento, enquanto as outras mostram a riqueza de diferentes combinações instrumentais!</p>
+            </div>
+
+            <h3>🎬 Vídeo Tutorial: Como Trocar Instrumentos em um MIDI</h3>
+            <p>Assista ao tutorial completo mostrando <strong>passo a passo</strong> como abrir um arquivo MIDI e trocar instrumentos usando um editor MIDI:</p>
+            
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 15px; margin: 25px 0;">
+                <!-- Vídeo será embedado aqui - substitua pelo seu vídeo -->
+                <video id="tutorialVideo" controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                    <source src="tutorial_midi.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeo HTML5.
+                </video>
+            </div>
+
+            <h3>✨ Versão Alterada</h3>
+            <p>Ouça a mesma música com <strong>arranjo e instrumentação diferentes</strong>:</p>
+            
+            <div class="content-card" style="margin: 20px 0;">
+                <p><strong>Versão simplificada com instrumentos modificados</strong></p>
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 15px 0;">
+                    <button class="seq-btn" onclick="playVariation('alterada')">▶️ Tocar</button>
+                    <button class="seq-btn" onclick="pauseMIDI()">⏸️ Pausar</button>
+                    <button class="seq-btn" onclick="stopMIDI()">⏹️ Parar</button>
+                </div>
+                <p style="margin-top: 10px; color: #666; font-size: 0.9em;">
+                    Mesma melodia com arranjo e instrumentação diferentes, demonstrando a flexibilidade dos arquivos MIDI.
+                </p>
+            </div>
+        </section>
+
+        <!-- Seção: Sequenciador MP3 -->
+        <section id="sequencer" class="section">
+            <h2>🎵 Sequenciador com Áudio Digital (MP3)</h2>
+            <p>Crie suas batidas usando <strong>áudio digitalizado em formato MP3</strong>! Clique nos quadrados para programar seus padrões rítmicos.</p>
+            
+            <div class="highlight-box">
+                <h3>🎧 Sobre os Samples MP3</h3>
+                <p>Diferente de síntese, este sequenciador usa <strong>arquivos de áudio digitalizados</strong> (MP3). Cada som foi gravado ou processado e salvo como arquivo de áudio comprimido, cumprindo o requisito de <strong>áudio digital</strong> do projeto.</p>
+            </div>
+            
+            <div class="tempo-control">
+                <label><strong>⏱️ Tempo (BPM):</strong></label>
+                <input type="range" id="tempoSlider" class="tempo-slider" min="60" max="180" value="120" oninput="updateTempo(this.value)">
+                <span id="tempoDisplay" style="font-weight: bold; font-size: 1.2em; color: #764ba2;">120 BPM</span>
+            </div>
+
+            <div class="sequencer">
+                <div class="seq-row">
+                    <div class="seq-label">Kick 🥁</div>
+                    <div class="seq-step" data-sound="kick" data-step="0"></div>
+                    <div class="seq-step" data-sound="kick" data-step="1"></div>
+                    <div class="seq-step" data-sound="kick" data-step="2"></div>
+                    <div class="seq-step" data-sound="kick" data-step="3"></div>
+                    <div class="seq-step" data-sound="kick" data-step="4"></div>
+                    <div class="seq-step" data-sound="kick" data-step="5"></div>
+                    <div class="seq-step" data-sound="kick" data-step="6"></div>
+                    <div class="seq-step" data-sound="kick" data-step="7"></div>
+                    <div class="seq-step" data-sound="kick" data-step="8"></div>
+                    <div class="seq-step" data-sound="kick" data-step="9"></div>
+                    <div class="seq-step" data-sound="kick" data-step="10"></div>
+                    <div class="seq-step" data-sound="kick" data-step="11"></div>
+                    <div class="seq-step" data-sound="kick" data-step="12"></div>
+                    <div class="seq-step" data-sound="kick" data-step="13"></div>
+                    <div class="seq-step" data-sound="kick" data-step="14"></div>
+                    <div class="seq-step" data-sound="kick" data-step="15"></div>
+                </div>
+                <div class="seq-row">
+                    <div class="seq-label">Snare 🎯</div>
+                    <div class="seq-step" data-sound="snare" data-step="0"></div>
+                    <div class="seq-step" data-sound="snare" data-step="1"></div>
+                    <div class="seq-step" data-sound="snare" data-step="2"></div>
+                    <div class="seq-step" data-sound="snare" data-step="3"></div>
+                    <div class="seq-step" data-sound="snare" data-step="4"></div>
+                    <div class="seq-step" data-sound="snare" data-step="5"></div>
+                    <div class="seq-step" data-sound="snare" data-step="6"></div>
+                    <div class="seq-step" data-sound="snare" data-step="7"></div>
+                    <div class="seq-step" data-sound="snare" data-step="8"></div>
+                    <div class="seq-step" data-sound="snare" data-step="9"></div>
+                    <div class="seq-step" data-sound="snare" data-step="10"></div>
+                    <div class="seq-step" data-sound="snare" data-step="11"></div>
+                    <div class="seq-step" data-sound="snare" data-step="12"></div>
+                    <div class="seq-step" data-sound="snare" data-step="13"></div>
+                    <div class="seq-step" data-sound="snare" data-step="14"></div>
+                    <div class="seq-step" data-sound="snare" data-step="15"></div>
+                </div>
+                <div class="seq-row">
+                    <div class="seq-label">Hi-Hat 🔔</div>
+                    <div class="seq-step" data-sound="hihat" data-step="0"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="1"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="2"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="3"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="4"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="5"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="6"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="7"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="8"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="9"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="10"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="11"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="12"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="13"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="14"></div>
+                    <div class="seq-step" data-sound="hihat" data-step="15"></div>
+                </div>
+                <div class="seq-row">
+                    <div class="seq-label">Bass 🎸</div>
+                    <div class="seq-step" data-sound="bass" data-step="0"></div>
+                    <div class="seq-step" data-sound="bass" data-step="1"></div>
+                    <div class="seq-step" data-sound="bass" data-step="2"></div>
+                    <div class="seq-step" data-sound="bass" data-step="3"></div>
+                    <div class="seq-step" data-sound="bass" data-step="4"></div>
+                    <div class="seq-step" data-sound="bass" data-step="5"></div>
+                    <div class="seq-step" data-sound="bass" data-step="6"></div>
+                    <div class="seq-step" data-sound="bass" data-step="7"></div>
+                    <div class="seq-step" data-sound="bass" data-step="8"></div>
+                    <div class="seq-step" data-sound="bass" data-step="9"></div>
+                    <div class="seq-step" data-sound="bass" data-step="10"></div>
+                    <div class="seq-step" data-sound="bass" data-step="11"></div>
+                    <div class="seq-step" data-sound="bass" data-step="12"></div>
+                    <div class="seq-step" data-sound="bass" data-step="13"></div>
+                    <div class="seq-step" data-sound="bass" data-step="14"></div>
+                    <div class="seq-step" data-sound="bass" data-step="15"></div>
+                </div>
+            </div>
+
+            <div class="seq-controls">
+                <button class="seq-btn" onclick="playSequence()">▶️ Tocar Loop</button>
+                <button class="seq-btn" onclick="stopSequence()">⏹️ Parar</button>
+                <button class="seq-btn" onclick="clearSequence()">🗑️ Limpar Tudo</button>
+                <button class="seq-btn" onclick="loadPattern()">🎲 Padrão Demo</button>
+            </div>
+
+            <!-- Animação dos Instrumentos -->
+            <div style="background: linear-gradient(135deg, rgba(102,126,234,0.08) 0%, rgba(240,147,251,0.08) 100%); padding: 25px; border-radius: 15px; margin: 30px 0; border: 2px solid rgba(102,126,234,0.2);">
+                <h3 style="margin: 0 0 20px 0; color: #667eea; font-size: 1.3em; text-align: center;">🎬 Animação Física dos Instrumentos</h3>
+                <canvas id="instrumentAnimation" width="1200" height="400" 
+                    style="width: 100%; 
+                           border-radius: 12px; 
+                           background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+                           box-shadow: inset 0 0 40px rgba(102,126,234,0.3), 0 10px 30px rgba(0,0,0,0.3);
+                           border: 1px solid rgba(102,126,234,0.25);
+                           display: block;"></canvas>
+            </div>
+        </section>
+
+        <!-- Seção: Quiz -->
+        <section id="quiz" class="section">
+            <h2>🎯 Quiz de Síntese Sonora</h2>
+            <p>Teste seus conhecimentos! O sistema selecionará <strong>5 perguntas aleatórias</strong> de um banco de <strong>15 perguntas</strong>.</p>
+            
+            <div class="quiz-container">
+                <button class="quiz-btn" onclick="startQuiz()" style="margin: 20px auto; display: block;">🎲 Iniciar Quiz Aleatório</button>
+                <div id="quizQuestions"></div>
+                <div id="quizResult"></div>
+            </div>
+        </section>
+
+        <!-- Seção: Créditos -->
+        <section id="credits" class="section">
+            <h2>★ Créditos e Agradecimentos</h2>
+            
+            <div class="highlight-box">
+                <h3 style="text-align: center; margin-bottom: 20px;">♪ Desenvolvido por</h3>
+                
+                <!-- Imagem do Grupo (Bitmap) -->
+                <div style="text-align: center; margin: 30px 0;">
+                    <img src="grupo.jpg" 
+                         alt="Foto do Grupo" 
+                         style="max-width: 600px; 
+                                width: 100%; 
+                                height: auto; 
+                                border-radius: 15px; 
+                                box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+                                border: 3px solid rgba(102, 126, 234, 0.3);">
+                </div>
+                
+                <div class="content-card" style="margin-top: 30px;">
+                    <h3 style="text-align: center;">◆ Equipe de Desenvolvimento</h3>
+                    <p style="text-align: center; font-size: 1.1em; line-height: 1.8;">
+                        <strong>Projeto:</strong> Sistema Multimídia - Synth Studio<br>
+                        <strong>Disciplina:</strong> Sistemas Multimídia<br>
+                        <strong>Integrantes:</strong><br>
+                        Osvaldo Vasconcelos de Carvalho<br>
+                        Ewerton Thyago Tavares da Silva<br>
+                        Wesclei Batista Da Cruz Júnior<br>
+                        Gabriel Porfírio dos Santos<br>
+                        Flávio Vecch de Brito Farias<br>
+                        Eduardo Barros Magalhães   
+                    </p>
+                </div>
+                
+                <div class="content-card" style="margin-top: 20px;">
+                    <h3 style="text-align: center;">♫ Tecnologias Utilizadas</h3>
+                    <ul class="info-list" style="columns: 2; column-gap: 30px;">
+                        <li>HTML5 Canvas (Imagens Bitmap)</li>
+                        <li>SVG (Imagem Vetorial)</li>
+                        <li>Web Audio API</li>
+                        <li>MIDI Player.js</li>
+                        <li>Soundfont.js</li>
+                        <li>JavaScript ES6+</li>
+                        <li>CSS3 Animations</li>
+                        <li>Responsive Design</li>
+                    </ul>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(102, 126, 234, 0.1); border-radius: 10px;">
+                    <p style="font-size: 1.2em; color: #667eea;">★ Obrigado por usar o Synth Studio! ★</p>
+                    <p style="color: #888; margin-top: 10px;">Sistema desenvolvido para fins educacionais</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
