@@ -18,18 +18,14 @@
     let currentInstruments = {1: 0, 2: 0};
     let audioEffectsChain; // Nó de entrada da cadeia de efeitos
 
-    // Inicializar samples de áudio MP3 para o sequenciador
+    // Inicializar samples de áudio MP3 para o sequenciador (OTIMIZADO)
     function initAudioSamples() {
-        // Carregar samples MP3
-        audioSamples.kick = new Audio('sounds/kick.mp3');
-        audioSamples.snare = new Audio('sounds/snare.mp3');
-        audioSamples.hihat = new Audio('sounds/hihat.mp3');
-        audioSamples.bass = new Audio('sounds/bass.mp3');
-        
-        // Pré-carregar os samples
-        Object.values(audioSamples).forEach(audio => {
-            audio.load();
-            audio.volume = 0.7;
+        // Carregar samples MP3 com preload otimizado
+        const sounds = ['kick', 'snare', 'hihat', 'bass'];
+        sounds.forEach(sound => {
+            audioSamples[sound] = new Audio(`sounds/${sound}.mp3`);
+            audioSamples[sound].preload = 'auto'; // Pré-carrega automaticamente
+            audioSamples[sound].volume = 0.7;
         });
     }
 
@@ -616,7 +612,6 @@ async function playMIDIFile(midiPath) {
         animCtx.font = 'bold 12px Arial';
         animCtx.textAlign = 'center';
         animCtx.shadowBlur = 0;
-        animCtx.fillText('KICK', 0, 5);
         
         animCtx.restore();
         
@@ -2041,4 +2036,146 @@ showSection = function(sectionId) {
     if (sectionId === 'learn' && !videoAnimRunning) {
         setTimeout(() => animateVideo(), 100);
     }
+    if (sectionId === 'quiz') {
+        // Para a animação atual se estiver rodando
+        spritesheetAnimRunning = false;
+        // Reseta para o frame 0 (início)
+        currentFrame = 0;
+        spritesheetPaused = false;
+        // Reinicia a animação
+        setTimeout(() => animateSpritesheet(), 100);
+    }
 };
+
+// ===== ANIMAÇÃO SPRITESHEET (QUIZ) =====
+let spritesheetAnimRunning = false;
+let spritesheetImage = null;
+let spritesheetLoaded = false;
+let spritesheetPaused = false;
+let spritesheetAnimationId = null;
+
+// Configurações do spritesheet - cada frame é 256x256
+const spritesheetConfig = {
+    frameWidth: 256,       // Largura de cada frame
+    frameHeight: 256,      // Altura de cada frame
+    framesPerRow: 12,      // Quantos frames por linha no spritesheet
+    totalFrames: 142,      // Total de frames
+    fps: 8,                // Velocidade da animação
+    pauseAtFrame87: true,  // Pausa no frame 87
+    pauseAtEnd: true,      // Pausa no final (frame 142)
+    minPauseTime: 2000,    // Tempo mínimo de pausa (2 segundos)
+    maxRandomPause: 3000   // Tempo aleatório adicional (0-3 segundos)
+};
+
+let currentFrame = 0;
+const frameDelay = 1000 / spritesheetConfig.fps;
+
+function initSpritesheet() {
+    if (spritesheetLoaded) return;
+    
+    spritesheetImage = new Image();
+    spritesheetImage.onload = function() {
+        spritesheetLoaded = true;
+        console.log('✅ Spritesheet carregado:', spritesheetImage.width, 'x', spritesheetImage.height);
+    };
+    spritesheetImage.onerror = function() {
+        console.error('❌ Erro ao carregar spritesheet.png - Verifique se o arquivo existe na pasta do projeto.');
+    };
+    spritesheetImage.src = 'spritesheet.png';
+}
+
+function animateSpritesheet() {
+    const canvas = document.getElementById('quizSpritesheet');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    spritesheetAnimRunning = true;
+    spritesheetPaused = false;
+    
+    // Inicializa spritesheet se ainda não foi carregado
+    if (!spritesheetLoaded) {
+        initSpritesheet();
+    }
+    
+    let lastTime = 0;
+    
+    function animate(currentTime) {
+        if (!spritesheetAnimRunning) return;
+        
+        // Se está pausado, apenas continua o loop sem avançar frames
+        if (spritesheetPaused) {
+            spritesheetAnimationId = requestAnimationFrame(animate);
+            return;
+        }
+        
+        const deltaTime = currentTime - lastTime;
+        
+        if (deltaTime >= frameDelay) {
+            lastTime = currentTime;
+            
+            // Limpa canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            if (spritesheetLoaded && spritesheetImage.complete) {
+                // Calcula posição do frame no spritesheet (grid)
+                const row = Math.floor(currentFrame / spritesheetConfig.framesPerRow);
+                const col = currentFrame % spritesheetConfig.framesPerRow;
+                
+                const sourceX = col * spritesheetConfig.frameWidth;
+                const sourceY = row * spritesheetConfig.frameHeight;
+                
+                // Desenha frame ajustado ao canvas pequeno
+                ctx.drawImage(
+                    spritesheetImage,
+                    sourceX, sourceY,
+                    spritesheetConfig.frameWidth, 
+                    spritesheetConfig.frameHeight,
+                    0, 0,
+                    canvas.width, 
+                    canvas.height
+                );
+                
+                // Avança para próximo frame
+                currentFrame++;
+                
+                // Verifica se chegou no frame 87 (primeira pausa)
+                if (currentFrame === 87 && spritesheetConfig.pauseAtFrame87) {
+                    spritesheetPaused = true;
+                    const pauseTime = spritesheetConfig.minPauseTime + 
+                                     Math.random() * spritesheetConfig.maxRandomPause;
+                    console.log(`⏸️ Pausando no frame 87 por ${(pauseTime/1000).toFixed(1)}s`);
+                    setTimeout(() => {
+                        spritesheetPaused = false;
+                        console.log('▶️ Continuando animação...');
+                    }, pauseTime);
+                }
+                
+                // Verifica se chegou no final (frame 142)
+                if (currentFrame >= spritesheetConfig.totalFrames) {
+                    if (spritesheetConfig.pauseAtEnd) {
+                        spritesheetPaused = true;
+                        currentFrame = 0; // Reseta para começar do início
+                        const pauseTime = spritesheetConfig.minPauseTime + 
+                                         Math.random() * spritesheetConfig.maxRandomPause;
+                        console.log(`⏸️ Pausando no final por ${(pauseTime/1000).toFixed(1)}s`);
+                        setTimeout(() => {
+                            spritesheetPaused = false;
+                            console.log('▶️ Recomeçando do frame 0...');
+                        }, pauseTime);
+                    } else {
+                        currentFrame = 0; // Loop direto sem pausa
+                    }
+                }
+            }
+        }
+        
+        spritesheetAnimationId = requestAnimationFrame(animate);
+    }
+    
+    spritesheetAnimationId = requestAnimationFrame(animate);
+}
+
+// Inicializa spritesheet quando página carregar
+window.addEventListener('load', () => {
+    initSpritesheet();
+});

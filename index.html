@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Synth Studio - Sistema Educacional Multimídia</title>
-    <script src="https://cdn.jsdelivr.net/npm/midi-player-js@2.0.7/browser/midiplayer.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tonejs/midi@2.0.28/build/Midi.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/soundfont-player@0.12.0/dist/soundfont-player.min.js"></script>
+    <!-- Bibliotecas carregadas de forma otimizada -->
+    <script defer src="https://cdn.jsdelivr.net/npm/midi-player-js@2.0.7/browser/midiplayer.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@tonejs/midi@2.0.28/build/Midi.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/soundfont-player@0.12.0/dist/soundfont-player.min.js"></script>
     
     <link rel="stylesheet" href="style.css">
 </head>
@@ -86,98 +87,232 @@
         <section id="learn" class="section">
             <h2>📚 Teoria da Síntese Sonora</h2>
             
-            <div class="highlight-box">
-                <h3>O que é Síntese de Áudio?</h3>
+            <!-- Áudio 1: Introdução Teoria -->
+            <div class="highlight-box" style="background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%); border-left: 4px solid #667eea; padding: 20px; margin: 25px 0;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <span style="font-size: 2em;">🎵</span>
+                    <audio controls preload="none" style="flex: 1; height: 40px; border-radius: 20px;">
+                        <source src="audio/01_teoria_intro.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
                 <p>A <strong>síntese de áudio</strong> é o processo de criar sons artificialmente usando componentes eletrônicos ou digitais. Diferente de gravar sons naturais (áudio digitalizado), a síntese <strong>gera ondas sonoras do zero</strong> usando algoritmos matemáticos e osciladores.</p>
                 <p>Sintetizadores foram revolucionários na música eletrônica, permitindo criar sons impossíveis de obter com instrumentos acústicos tradicionais.</p>
             </div>
 
             <h3>🌊 Formas de Onda Básicas</h3>
+            
+            <!-- Áudio 2: Formas de Onda -->
+            <div style="background: linear-gradient(135deg, rgba(102,126,234,0.05) 0%, rgba(118,75,162,0.05) 100%); border-radius: 12px; padding: 15px; margin: 20px 0; border: 1px solid rgba(102,126,234,0.2);">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="font-size: 1.5em;">🎼</span>
+                    <audio controls preload="none" style="flex: 1; height: 35px; border-radius: 17px;">
+                        <source src="audio/02_formas_onda.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
             <p>Todo som sintetizado começa com <strong>formas de onda fundamentais</strong>. Cada uma tem características tímbricas únicas:</p>
 
             <div class="waveform-demo">
+                <!-- Áudio 3: Sine Wave -->
                 <div class="wave-card">
                     <canvas id="sineWave" width="200" height="120"></canvas>
                     <h4>Sine (Senoidal)</h4>
+                    <div style="margin: 10px 0;">
+                        <audio controls preload="none" style="width: 100%; height: 30px;">
+                            <source src="audio/03_sine.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
                     <p><strong>Som puro e suave</strong>, sem harmônicos. É a forma de onda mais simples, usada para tons puros e sub-bass.</p>
                 </div>
+                
+                <!-- Áudio 4: Square Wave -->
                 <div class="wave-card">
                     <canvas id="squareWave" width="200" height="120"></canvas>
                     <h4>Square (Quadrada)</h4>
+                    <div style="margin: 10px 0;">
+                        <audio controls preload="none" style="width: 100%; height: 30px;">
+                            <source src="audio/04_square.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
                     <p><strong>Som oco e robusto</strong>, rico em harmônicos ímpares. Usado para leads e baixos eletrônicos.</p>
                 </div>
+                
+                <!-- Áudio 5: Sawtooth Wave -->
                 <div class="wave-card">
                     <canvas id="sawWave" width="200" height="120"></canvas>
                     <h4>Sawtooth (Dente de Serra)</h4>
+                    <div style="margin: 10px 0;">
+                        <audio controls preload="none" style="width: 100%; height: 30px;">
+                            <source src="audio/05_sawtooth.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
                     <p><strong>Som brilhante e rico</strong> em todos os harmônicos. A forma mais versátil para síntese.</p>
                 </div>
+                
+                <!-- Áudio 6: Triangle Wave -->
                 <div class="wave-card">
                     <canvas id="triangleWave" width="200" height="120"></canvas>
                     <h4>Triangle (Triangular)</h4>
+                    <div style="margin: 10px 0;">
+                        <audio controls preload="none" style="width: 100%; height: 30px;">
+                            <source src="audio/06_triangle.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
                     <p><strong>Entre Sine e Square</strong>, suave mas com corpo. Harmônicos ímpares decaem rapidamente.</p>
                 </div>
             </div>
 
             <h3>📈 Envelope ADSR</h3>
+            
+            <!-- Áudio 7: ADSR Intro -->
+            <div style="background: linear-gradient(135deg, rgba(102,126,234,0.05) 0%, rgba(118,75,162,0.05) 100%); border-radius: 12px; padding: 15px; margin: 20px 0; border: 1px solid rgba(102,126,234,0.2);">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="font-size: 1.5em;">📊</span>
+                    <audio controls preload="none" style="flex: 1; height: 35px; border-radius: 17px;">
+                        <source src="audio/07_envelope_adsr.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
             <p>O <strong>envelope ADSR</strong> controla como o som evolui ao longo do tempo. É fundamental para dar "vida" e expressividade aos sons sintetizados:</p>
             
             <div class="content-grid">
+                <!-- Áudio 8: Attack -->
                 <div class="content-card">
                     <h4>⚡ Attack (Ataque)</h4>
+                    <div style="margin: 10px 0;">
+                        <audio controls preload="none" style="width: 100%; height: 30px;">
+                            <source src="audio/08_attack.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
                     <p>Tempo que o som leva para atingir o <strong>volume máximo</strong> após a nota ser tocada. Attack rápido = som percussivo. Attack lento = som suave que "cresce".</p>
                 </div>
+                
+                <!-- Áudio 9: Decay -->
                 <div class="content-card">
                     <h4>📉 Decay (Decaimento)</h4>
+                    <div style="margin: 10px 0;">
+                        <audio controls preload="none" style="width: 100%; height: 30px;">
+                            <source src="audio/09_decay.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
                     <p>Tempo para o volume <strong>cair do pico até o nível de sustentação</strong>. Controla o "brilho inicial" do som.</p>
                 </div>
+                
+                <!-- Áudio 10: Sustain -->
                 <div class="content-card">
                     <h4>🎹 Sustain (Sustentação)</h4>
+                    <div style="margin: 10px 0;">
+                        <audio controls preload="none" style="width: 100%; height: 30px;">
+                            <source src="audio/10_sustain.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
                     <p><strong>Nível mantido</strong> enquanto a tecla está pressionada. É o único parâmetro que representa nível (não tempo).</p>
                 </div>
+                
+                <!-- Áudio 11: Release -->
                 <div class="content-card">
                     <h4>🌊 Release (Liberação)</h4>
+                    <div style="margin: 10px 0;">
+                        <audio controls preload="none" style="width: 100%; height: 30px;">
+                            <source src="audio/11_release.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
                     <p>Tempo para o som <strong>desaparecer completamente</strong> após soltar a tecla. Release longo = som que "flutua".</p>
                 </div>
             </div>
 
             <h3>🎛️ Tipos de Síntese</h3>
             
-            <div class="highlight-box">
+            <!-- Áudio 12: Síntese Subtrativa -->
+            <div class="highlight-box" style="border-left: 4px solid #667eea;">
                 <h4>🔻 Síntese Subtrativa</h4>
+                <div style="margin: 12px 0;">
+                    <audio controls preload="none" style="width: 100%; max-width: 450px; height: 35px; border-radius: 17px;">
+                        <source src="audio/12_subtrativa.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
                 <p>O tipo mais comum. Começa com <strong>ondas ricas em harmônicos</strong> (como sawtooth) e usa <strong>filtros</strong> para remover frequências, esculpindo o timbre desejado. Usado em sintetizadores analógicos clássicos.</p>
             </div>
 
-            <div class="highlight-box">
+            <!-- Áudio 13: Síntese Aditiva -->
+            <div class="highlight-box" style="border-left: 4px solid #764ba2;">
                 <h4>➕ Síntese Aditiva</h4>
+                <div style="margin: 12px 0;">
+                    <audio controls preload="none" style="width: 100%; max-width: 450px; height: 35px; border-radius: 17px;">
+                        <source src="audio/13_aditiva.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
                 <p>Cria sons complexos <strong>combinando múltiplas ondas simples</strong> (geralmente senoidais). Cada onda representa um harmônico. Muito poderosa mas computacionalmente intensiva.</p>
             </div>
 
-            <div class="highlight-box">
+            <!-- Áudio 14: Síntese FM -->
+            <div class="highlight-box" style="border-left: 4px solid #667eea;">
                 <h4>📻 Síntese FM (Frequency Modulation)</h4>
+                <div style="margin: 12px 0;">
+                    <audio controls preload="none" style="width: 100%; max-width: 450px; height: 35px; border-radius: 17px;">
+                        <source src="audio/14_fm.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
                 <p><strong>Modula a frequência de uma onda com outra</strong>, criando timbres complexos e metálicos. Popularizada pelo Yamaha DX7. Excelente para sons de sino, piano elétrico e pads atmosféricos.</p>
             </div>
 
-            <div class="highlight-box">
+            <!-- Áudio 15: Síntese Wavetable -->
+            <div class="highlight-box" style="border-left: 4px solid #764ba2;">
                 <h4>📊 Síntese por Tabela de Onda (Wavetable)</h4>
+                <div style="margin: 12px 0;">
+                    <audio controls preload="none" style="width: 100%; max-width: 450px; height: 35px; border-radius: 17px;">
+                        <source src="audio/15_wavetable.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
                 <p>Usa <strong>amostras de ondas pré-gravadas</strong> que podem ser percorridas e interpoladas, criando evolução tímbrica. Combina o melhor de síntese e sampling.</p>
             </div>
 
             <h3>🎚️ Osciladores e LFO</h3>
-            <p>Um <strong>oscilador</strong> é um componente que gera formas de onda. É o coração de qualquer sintetizador - sem osciladores, não há som!</p>
-            <p>Um <strong>LFO (Low Frequency Oscillator)</strong> é um oscilador de <strong>baixa frequência</strong> (abaixo da faixa audível) usado para <strong>modular parâmetros</strong> como pitch (vibrato), volume (tremolo) ou filtros. Cria movimento e vida no som.</p>
+            
+            <!-- Áudio 16: Osciladores e LFO -->
+            <div style="background: linear-gradient(135deg, rgba(102,126,234,0.05) 0%, rgba(118,75,162,0.05) 100%); border-radius: 12px; padding: 15px; margin: 20px 0; border: 1px solid rgba(102,126,234,0.2);">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                    <span style="font-size: 1.5em;">🎚️</span>
+                    <audio controls preload="none" style="flex: 1; height: 35px; border-radius: 17px;">
+                        <source src="audio/16_osciladores_lfo.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+                <p>Um <strong>oscilador</strong> é um componente que gera formas de onda. É o coração de qualquer sintetizador - sem osciladores, não há som!</p>
+                <p>Um <strong>LFO (Low Frequency Oscillator)</strong> é um oscilador de <strong>baixa frequência</strong> (abaixo da faixa audível) usado para <strong>modular parâmetros</strong> como pitch (vibrato), volume (tremolo) ou filtros. Cria movimento e vida no som.</p>
+            </div>
 
             <h3>🎼 MIDI - Musical Instrument Digital Interface</h3>
-            <p><strong>MIDI</strong> é um protocolo de comunicação que permite que instrumentos musicais eletrônicos, computadores e outros dispositivos se comuniquem. Diferente de áudio digital, MIDI transmite <strong>dados de performance</strong> (notas, velocidade, duração), não o som em si.</p>
-            <p>Vantagens do MIDI: arquivos pequenos, totalmente editável, permite trocar sons sem regravar, usado em sequenciadores como nosso Sequenciador MIDI.</p>
+            
+            <!-- Áudio 17: MIDI -->
+            <div style="background: linear-gradient(135deg, rgba(102,126,234,0.05) 0%, rgba(118,75,162,0.05) 100%); border-radius: 12px; padding: 15px; margin: 20px 0; border: 1px solid rgba(102,126,234,0.2);">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                    <span style="font-size: 1.5em;">🎹</span>
+                    <audio controls preload="none" style="flex: 1; height: 35px; border-radius: 17px;">
+                        <source src="audio/17_midi.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+                <p><strong>MIDI</strong> é um protocolo de comunicação que permite que instrumentos musicais eletrônicos, computadores e outros dispositivos se comuniquem. Diferente de áudio digital, MIDI transmite <strong>dados de performance</strong> (notas, velocidade, duração), não o som em si.</p>
+                <p>Vantagens do MIDI: arquivos pequenos, totalmente editável, permite trocar sons sem regravar, usado em sequenciadores como nosso Sequenciador MIDI.</p>
+            </div>
 
             <h3>🎨 Filtros</h3>
-            <p>Filtros são processadores que <strong>removem ou atenuam certas frequências</strong>. Os tipos principais são:</p>
-            <ul class="info-list">
-                <li><strong>Low-Pass:</strong> Deixa passar frequências baixas, remove agudos (som mais "escuro")</li>
-                <li><strong>High-Pass:</strong> Deixa passar frequências altas, remove graves (som mais "fino")</li>
-                <li><strong>Band-Pass:</strong> Deixa passar uma faixa específica de frequências</li>
-                <li><strong>Notch:</strong> Remove uma faixa específica de frequências</li>
-            </ul>
+            
+            <!-- Áudio 18: Filtros -->
+            <div style="background: linear-gradient(135deg, rgba(102,126,234,0.05) 0%, rgba(118,75,162,0.05) 100%); border-radius: 12px; padding: 15px; margin: 20px 0; border: 1px solid rgba(102,126,234,0.2);">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                    <span style="font-size: 1.5em;">🔊</span>
+                    <audio controls preload="none" style="flex: 1; height: 35px; border-radius: 17px;">
+                        <source src="audio/18_filtros.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+                <p>Filtros são processadores que <strong>removem ou atenuam certas frequências</strong>. Os tipos principais são:</p>
+                <ul class="info-list">
+                    <li><strong>Low-Pass:</strong> Deixa passar frequências baixas, remove agudos (som mais "escuro")</li>
+                    <li><strong>High-Pass:</strong> Deixa passar frequências altas, remove graves (som mais "fino")</li>
+                    <li><strong>Band-Pass:</strong> Deixa passar uma faixa específica de frequências</li>
+                    <li><strong>Notch:</strong> Remove uma faixa específica de frequências</li>
+                </ul>
+            </div>
         </section>
 
         <!-- Seção: Tutorial MIDI -->
@@ -283,6 +418,18 @@
             <div class="highlight-box">
                 <h3>🎧 Sobre os Samples MP3</h3>
                 <p>Diferente de síntese, este sequenciador usa <strong>arquivos de áudio digitalizados</strong> (MP3). Cada som foi gravado ou processado e salvo como arquivo de áudio comprimido, cumprindo o requisito de <strong>áudio digital</strong> do projeto.</p>
+            </div>
+            
+            <!-- Vídeo Demonstrativo do Sequenciador -->
+            <div class="highlight-box" style="margin: 25px 0;">
+                <h3>🎬 Vídeo: Como Usar o Sequenciador</h3>
+                <p>Assista à demonstração completa de como criar batidas no sequenciador:</p>
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 15px; margin: 20px 0;">
+                    <video id="sequencerDemo" controls preload="none" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                        <source src="demo_sequenciador.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeo HTML5.
+                    </video>
+                </div>
             </div>
             
             <div class="tempo-control">
@@ -392,7 +539,13 @@
 
         <!-- Seção: Quiz -->
         <section id="quiz" class="section">
-            <h2>🎯 Quiz de Síntese Sonora</h2>
+            <h2 style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+                Quiz de Síntese Sonora
+                <canvas id="quizSpritesheet" width="144" height="144" 
+                    style="border-radius: 8px; 
+                           background: transparent;
+                           display: inline-block;"></canvas>
+            </h2>
             <p>Teste seus conhecimentos! O sistema selecionará <strong>5 perguntas aleatórias</strong> de um banco de <strong>15 perguntas</strong>.</p>
             
             <div class="quiz-container">
